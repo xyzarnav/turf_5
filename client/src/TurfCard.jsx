@@ -10,17 +10,34 @@ const TurfCard = ({ turf }) => {
   };
 
   return (
-    <Link to="/bookingpage"> {/* Link to booking page */}
+    <Link to="/bookingpage" className="block transform transition duration-300 hover:scale-105">
       <Card
         hoverable
-        style={{ width: 250, marginBottom: 20 }}
-        cover={<img alt={turf.name} src={turf.imageUrl} style={{ height: 150, objectFit: 'cover' }} />}
+        className="rounded-lg shadow-lg overflow-hidden"
+        cover={
+          <img
+            alt={turf.name}
+            src={turf.imageUrl}
+            className="w-full h-48 object-cover"
+          />
+        }
       >
         <Meta
-          title={turf.name}
-          description={`Price: ${turf.price}, Area: ${turf.area}`}
+          title={<span className="text-lg font-semibold">{turf.name}</span>}
+          description={
+            <div className="text-gray-600">
+              <p>Price: {turf.price}</p>
+              <p>Area: {turf.area}</p>
+            </div>
+          }
         />
-        <Button className='custom-button' type="primary" style={{ marginTop: '16px' }} onClick={() => handleBookNow(turf.id)}>Book Now</Button>
+        <Button
+          className="mt-4 w-full bg-blue-600 text-white hover:bg-blue-700 transition"
+          type="primary"
+          onClick={() => handleBookNow(turf.id)}
+        >
+          Book Now
+        </Button>
       </Card>
     </Link>
   );

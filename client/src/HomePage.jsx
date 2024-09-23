@@ -5,7 +5,12 @@ import TurfCard from "./TurfCard";
 import Footer from "./Footer";
 import axios from "axios";
 import { Row, Col, Select, Button } from "antd";
-import video from "./assets/media/beachsoccer.mp4"; // Ensure the video file name is correct
+import video from "./assets/media/beachsoccer.mp4";
+import india from "./assets/media/india-map.png";
+import search from "./assets/media/search.png";
+import book from "./assets/media/book.png";
+import play from "./assets/media/play.png";
+import meetPal from "./assets/media/meet-pals.png"; // Ensure the video file name is correct
 
 const { Option } = Select;
 
@@ -85,25 +90,31 @@ const HomePage = () => {
           <h2 className="mt-4 text-3xl font-medium">Find Your Perfect Turf</h2>
         </div>
       </div>
+
       <div className="flex flex-col md:flex-row border-t-2 border-green-600 bg-slate-900 ">
         <div className="w-full md:w-1/2">
-          <img  className="w-full md:h-full object-cover" alt="" />
+          <img src={india} className="w-full md:h-full object-cover" alt="" />
         </div>
         <div className="bg-gradient-to-r from-green-400 to-yellow-300 p-4 md:w-1/2">
           <h3 className="text-2xl md:text-5xl font-medium mt-4 md:mt-10">
-            PLAYSPOT HAS
+            WE ARE GROWING !!!
           </h3>
           <h1 className="text-3xl md:text-7xl lg:text-8xl font-bold text-white mt-2 md:mt-5">
-            PRESENCE IN ALL CITIES ACROSS INDIA
+            EXPANDING OUR PRESENCE IN CITIES ACROSS INDIA
           </h1>
           <h6 className="text-sm md:text-xl font-normal mt-2 md:mt-5">
-            JOIN WITH THE LARGEST SPORTS GROUND MANAGEMENT SOLUTION
+            JOIN US AS WE BUILD ONE OF THE LARGEST SPORTS GROUND MANAGEMENT
+            SOLUTIONS
           </h6>
         </div>
       </div>
       <div className="flex flex-col md:flex-row gap-2 justify-around p-10">
         <div className="text-center md:w-1/3 mt-10 md:px-10">
-          <img className="w-14 mx-auto"  alt="" />
+          <img
+            className="w-14 mx-auto filter invert"
+            src={search}
+            alt="Search Icon"
+          />
           <h1 className="mt-2 text-2xl">Search</h1>
           <p className="mt-2 text-sm font-light md:text-base">
             Are you looking to play after work, organize your Sunday Five's
@@ -112,7 +123,7 @@ const HomePage = () => {
           </p>
         </div>
         <div className="text-center md:w-1/3 mt-10 md:px-10">
-          <img className="w-14 mx-auto"  alt="" />
+          <img className="w-14 mx-auto filter invert" src={book} alt="Logo" />
           <h1 className="mt-2 text-2xl">Book</h1>
           <p className="mt-2 text-sm font-light md:text-base">
             Once you’ve found the perfect ground, court, or gym, connect with
@@ -121,7 +132,11 @@ const HomePage = () => {
           </p>
         </div>
         <div className="text-center md:w-1/3 mt-10 md:px-10">
-          <img className="w-14 mx-auto"  alt="" />
+          <img
+            className="w-14 mx-auto filter invert"
+            src={play}
+            alt="Play Icon"
+          />
           <h1 className="mt-2 text-2xl">Play</h1>
           <p className="mt-2 text-sm font-light md:text-base">
             You’re the hero. You’ve found a stunning turf or court, booked with
@@ -132,11 +147,7 @@ const HomePage = () => {
       </div>
       <div className="flex flex-col md:flex-row bg-gray-900 py-5">
         <div className="md:hidden p-10 text-center">
-          <img
-            // src={meetPal}
-            className="w-80 object-cover mx-auto px-10"
-            alt=""
-          />
+          <img className="w-14 mx-auto" src={play} alt="" />
         </div>
         <div className="text-center md:w-1/2 md:p-10 md:mt-5">
           <h1 className="text-green-600 text-3xl md:text-4xl">
@@ -153,7 +164,7 @@ const HomePage = () => {
         </div>
         <div className="hidden md:flex md:w-1/2">
           <img
-            // src={meetPal}
+            src={meetPal}
             className="w-96 object-cover px-10 mx-auto"
             alt=""
           />
