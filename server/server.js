@@ -202,6 +202,24 @@ app.get('/turfs', (req, res) => {
         return res.status(200).json(result);
     });
 });
+// Fetch bookings for a specific user on a specific date
+app.get('/bookings/:email/:date', (req, res) => {
+    const { email, date } = req.params;
+    const sql = `
+        SELECT b.*, t.name AS turfName
+        FROM bookings b
+        JOIN turfs t ON b.turf_id = t.id
+        WHERE b.email = ? AND b.date = ?
+    `;
+
+    db.query(sql, [email, date], (err, result) => {
+        if (err) {
+            console.error('Error fetching bookings:', err);
+            return res.status(500).json({ error: 'Failed to fetch bookings' });
+        }
+        return res.status(200).json(result);
+    });
+});
 
 // Fetch distinct areas
 app.get('/areas', (req, res) => {
