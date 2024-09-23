@@ -85,10 +85,7 @@ const BookingPage = () => {
 
   const renderAvailabilityGrid = () => {
     return (
-      <Card
-        title="6 AM to 12 AM Availability"
-        className="bg-gray-800 text-white"
-      >
+      <Card title="6 AM to 12 AM Availability" className="shadow-lg rounded-lg">
         <div className="grid grid-cols-4 gap-2">
           {[...Array(18)].map((_, index) => {
             const timeSlot = index + 6;
@@ -96,11 +93,12 @@ const BookingPage = () => {
             return (
               <div
                 key={index}
-                className={`p-4 text-center rounded ${
+                className={`p-4 text-center rounded-lg transition-colors duration-300 ${
                   isBooked
                     ? "bg-red-600 cursor-not-allowed"
                     : "bg-green-600 cursor-pointer hover:bg-green-500"
                 }`}
+                onClick={() => !isBooked && setSelectedTime(timeSlot)}
               >
                 {timeSlot}:00 - {timeSlot + 1}:00
               </div>
@@ -112,75 +110,85 @@ const BookingPage = () => {
   };
 
   if (!turf) {
-    return <div className="text-center text-white">Loading...</div>;
+    return <div className="text-center text-black">Loading...</div>;
   }
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen">
+    <div className="bg-white text-black min-h-screen">
       <Navbar />
       <div className="flex flex-col md:flex-row">
-        <div className="md:w-1/2 p-4 bg-gray-800 relative">
-          <img
-            src={turf.imageUrl}
-            alt={turf.name}
-            className="w-full h-60 object-cover rounded-lg shadow-lg"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center p-4">
-            <h2 className="text-2xl font-bold">{turf.name}</h2>
-            <p>{turf.detailed_info}</p>
-            <p>Price: {turf.price}</p>
-            <p>Area: {turf.area}</p>
-            <p>
-              Sports: {turf.cricket && "Cricket"} {turf.football && "Football"}{" "}
-              {turf.badminton && "Badminton"}
-            </p>
+        <div className="md:w-1/2 p-4">
+          <div className="relative">
+            <img
+              src={turf.imageUrl}
+              alt={turf.name}
+              className="w-full h-60 object-cover rounded-lg shadow-lg"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center p-4">
+              <h2 className="text-2xl font-bold text-white">{turf.name}</h2>
+              <p className="text-white">{turf.detailed_info}</p>
+              <p className="text-white">Price: {turf.price}</p>
+              <p className="text-white">Area: {turf.area}</p>
+              <p className="text-white">
+                Sports: {turf.cricket && "Cricket"}{" "}
+                {turf.football && "Football"} {turf.badminton && "Badminton"}
+              </p>
+            </div>
+            {renderAvailabilityGrid()}
           </div>
-          {renderAvailabilityGrid()}
         </div>
         <div className="md:w-1/2 p-4">
-          <div className="bg-gray-800 rounded-lg p-6 shadow-lg">
+          <div className="bg-gray-100 rounded-lg p-6 shadow-lg">
             <h3 className="text-xl font-semibold mb-4">Book Now</h3>
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-              <label htmlFor="name">Name:</label>
+              <label htmlFor="name" className="font-semibold">
+                Name:
+              </label>
               <input
                 type="text"
                 id="name"
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="p-2 rounded bg-gray-700 text-white"
+                className="p-2 rounded border border-gray-300 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
 
-              <label htmlFor="email">Email:</label>
+              <label htmlFor="email" className="font-semibold">
+                Email:
+              </label>
               <input
                 type="email"
                 id="email"
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="p-2 rounded bg-gray-700 text-white"
+                className="p-2 rounded border border-gray-300 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
 
-              <label htmlFor="date">Date:</label>
+              <label htmlFor="date" className="font-semibold">
+                Date:
+              </label>
               <DatePicker
                 id="date"
                 name="date"
                 value={date ? moment(date, "YYYY-MM-DD") : null}
                 onChange={(date, dateString) => setDate(dateString)}
-                className="p-2 rounded bg-gray-700 text-white"
+                className="p-2 rounded border border-gray-300 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
                 format="YYYY-MM-DD"
               />
 
-              <label htmlFor="selectedTime">Select Time:</label>
+              <label htmlFor="selectedTime" className="font-semibold">
+                Select Time:
+              </label>
               <select
                 id="selectedTime"
                 name="selectedTime"
                 value={selectedTime}
                 onChange={(e) => setSelectedTime(e.target.value)}
-                className="p-2 rounded bg-gray-700 text-white"
+                className="p-2 rounded border border-gray-300 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
                 <option value="">Select Time</option>
@@ -194,25 +202,29 @@ const BookingPage = () => {
                 })}
               </select>
 
-              <label htmlFor="paymentProof">Payment Proof (Image):</label>
+              <label htmlFor="paymentProof" className="font-semibold">
+                Payment Proof (Image):
+              </label>
               <input
                 type="file"
                 id="paymentProof"
                 name="paymentProof"
                 onChange={handlePaymentProofChange}
-                className="p-2 rounded bg-gray-700 text-white"
+                className="p-2 rounded border border-gray-300 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
                 accept="image/*"
               />
 
-              <label htmlFor="numberOfPeople">Number of People:</label>
+              <label htmlFor="numberOfPeople" className="font-semibold">
+                Number of People:
+              </label>
               <input
                 type="number"
                 id="numberOfPeople"
                 name="numberOfPeople"
                 value={numberOfPeople}
                 onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
-                className="p-2 rounded bg-gray-700 text-white"
+                className="p-2 rounded border border-gray-300 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
 
